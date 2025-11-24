@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:pressly/views/auth/signin_screen.dart';
+import 'package:pressly/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:pressly/views/screens/auth/sign_in_screen.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   const DrawerMenuWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return Drawer(
       child: Column(
         children: [
           AppBar(
+            automaticallyImplyLeading: false,
             title: Text('Menu'),
             centerTitle: true,
             leading: IconButton(
@@ -63,6 +67,19 @@ class DrawerMenuWidget extends StatelessWidget {
               //     title: Text('Informasi Akun'),
               //   ),
               // ),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.dark_mode_outlined),
+                  title: Text('Mode Gelap'),
+                  trailing: Switch(
+                    value: theme.isDarkMode,
+                    onChanged: (value) {
+                      final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+                      themeProvider.toggleTheme(value);
+                    }
+                  ),
+                ),
+              ),
               Card(
                 child: ListTile(
                   leading: Icon(Icons.info),
