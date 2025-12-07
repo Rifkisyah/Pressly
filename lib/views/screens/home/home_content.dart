@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pressly/services/article_service.dart';
+import 'package:provider/provider.dart';
+import '../../../providers/theme_provider.dart';
 import '../article/detailed_news_article.dart';
 
 class HomeScreenContent extends StatefulWidget {
@@ -13,8 +15,10 @@ class HomeScreenContent extends StatefulWidget {
 class _HomeScreenContentState extends State<HomeScreenContent> {
   final Future<List<Map<String, dynamic>>> futureArticles = ArticleService.fetchArticles();
 
+
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: futureArticles,
       builder: (context, snapshot) {
@@ -33,81 +37,80 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         final allArticles = snapshot.data!;
         final topFive = allArticles.take(5).toList();
 
-        return Column(
-          children: [
-            CarouselSection(topFive: topFive),
-            Expanded(
-              child: ListView.builder(
-                itemCount: allArticles.length,
-                itemBuilder: (context, index) {
-                  final article = allArticles[index];
+        return ListView.builder(
+          itemCount: allArticles.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return CarouselSection(topFive: topFive);
+            }
+            final article = allArticles[index - 1];
 
-                  return Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Divider(color: Colors.grey.shade400, height: 0, thickness: 4, indent: 10, endIndent: 10),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailArticleScreen(article: article),
-                            ),
-                          );
-                        },
-                        child: Card(
-                          elevation: 0,
-                          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: article['image'] != null ? Image.network(
-                                    article['image'],
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
-                                    ) : Center(
-                                      child: Container(
-                                        width: 500,
-                                        height: 120,
-                                        color: Colors.grey.shade400,
-                                        child: const Icon(Icons.image_not_supported, size: 50, color: Colors.white),
-                                      ),
-                                    ),
-                                )
-                              ),
-                              SizedBox(width: 20),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      article['title'] ?? "No Title",
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      article['source_name'] ?? "Unknown Source",
-                                      style: const TextStyle(color: Colors.grey),
-                                    ),
-                                  ],
+            return Column(
+              children: [
+                // Divider(color: (theme.isDarkMode) ? Colors.white : Colors.black, height: 0, thickness: 1, indent: 10, endIndent: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailArticleScreen(article: article),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    elevation: 0,
+                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: (theme.isDarkMode) ? Colors.black26 : Colors.white,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: article['image'] != null ? Image.network(
+                              article['image'],
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                              ) : Center(
+                                child: Container(
+                                  width: 500,
+                                  height: 120,
+                                  color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,
+                                  child: Icon(Icons.image_not_supported, size: 80, color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,),
                                 ),
+                              ),
+                          )
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                article['title'] ?? "No Title",
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                article['source_name'] ?? "Unknown Source",
+                                style: const TextStyle(color: Colors.grey),
                               ),
                             ],
                           ),
                         ),
-                      )
-                    ],
-                  );
-                },
-              ),
-            ),
-          ],
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
         );
       },
     );
@@ -188,11 +191,19 @@ class _CarouselSectionState extends State<CarouselSection> {
                           ? Image.network(
                         item['image'],
                         width: double.infinity,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                         errorBuilder: (_, __, ___) => Container(
-                          color: Colors.black26,
-                          child: const Icon(Icons.broken_image, size: 50, color: Colors.white),
-                        ),
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              size: 50,
+                              color: Colors.black,
+                            ),
+                          )
+                         ),
                       )
                           : Container(
                         color: Colors.black26,

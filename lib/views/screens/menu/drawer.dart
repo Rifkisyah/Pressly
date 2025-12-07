@@ -24,7 +24,6 @@ class DrawerMenuWidget extends StatelessWidget {
             ),
           ),
           Column(
-
             children: [
               SizedBox(height: 10,),
               Text('Masuk Untuk Mendapat Lebih Banyak Pengalaman', style: TextStyle(fontSize: 14),),
@@ -34,7 +33,7 @@ class DrawerMenuWidget extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor: (theme.isDarkMode) ? Colors.black26 : Colors.black,
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 20),
                   elevation: 0,
                   shape: RoundedRectangleBorder(

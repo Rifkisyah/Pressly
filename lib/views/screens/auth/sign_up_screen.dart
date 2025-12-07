@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/theme_provider.dart';
 
 class signUpScreen extends StatefulWidget {
   const signUpScreen({super.key});
@@ -12,16 +15,11 @@ class _signUpScreenState extends State<signUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('../assets/images/logo_app.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
+        title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
           centerTitle: true,
-        shape: Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-            width: 3.0,
-          ),
-        ),
       ),
       body: Padding(
           padding: EdgeInsets.all(20),
@@ -32,27 +30,37 @@ class _signUpScreenState extends State<signUpScreen> {
               Text('Daftar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
               Text("Gunakan layanan di bawah ini untuk daftar Ke Pressly.", style: TextStyle(fontSize: 13),),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton.icon(
+                    onPressed: (){
 
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 40,
-                    child: ElevatedButton.icon(
-                      onPressed: (){
-
-                      },
-                      icon: Image.network('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png'),
-                      label: Text('Daftar Dengan Google', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                      style: ElevatedButton.styleFrom(
+                    },
+                    icon: Image.network('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png'),
+                    label: Text(
+                      'Daftar Dengan Google',
+                      style: TextStyle(
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      side: BorderSide(
+                        width: 2.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
                         side: BorderSide(
+                          color: (theme.isDarkMode) ? Colors.white : Colors.black,
                           width: 2.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
+                          style: BorderStyle.solid,
                         ),
                       ),
                     ),
-                  )
+                  ),
+                )
               ),
 
               // separator

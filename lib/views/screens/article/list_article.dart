@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:pressly/services/article_service.dart';
+
+import '../../../services/article_service.dart';
 import 'detailed_news_article.dart';
 
-class ListNewsArticle extends StatefulWidget {
-  const ListNewsArticle({super.key});
+class ListArticle extends StatefulWidget {
+  final String category;
+
+  ListArticle({super.key, required this.category});
 
   @override
-  State<ListNewsArticle> createState() => _ListNewsArticleState();
+  State<ListArticle> createState() => _ListArticleState();
 }
 
-class _ListNewsArticleState extends State<ListNewsArticle> {
-  final Future<List<Map<String, dynamic>>> futureArticles = ArticleService.fetchArticles();
+class _ListArticleState extends State<ListArticle> {
+  late Future<List<Map<String, dynamic>>> fetchArticle;
+
+  @override
+  void initState(){
+    super.initState();
+    fetchArticle = ArticleService.fetchArticlesByCategory(widget.category);
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: futureArticles,
+      future: fetchArticle,
       builder: (context, snapshot){
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -52,7 +61,8 @@ class _ListNewsArticleState extends State<ListNewsArticle> {
                               article['image'],
                               fit: BoxFit.cover,
                               errorBuilder: (_, __, ___) => const Center(
-                                child: Icon(Icons.broken_image, size: 50),
+                                child: Icon(Icons.broken_image, size: 50,),
+                                heightFactor: 3,
                               ),
                             )
                                 : const Center(

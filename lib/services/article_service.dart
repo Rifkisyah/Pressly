@@ -13,6 +13,28 @@ class ArticleService {
     return response.cast<Map<String, dynamic>>();
   }
 
+  /// Ambil artikel berdasarkan kategori
+  static Future<List<Map<String, dynamic>>> fetchArticlesByCategory(String category) async {
+    final List<dynamic> response = await supabase
+        .from('news_article')
+        .select()
+        .eq('category', category)
+        .order('published_at', ascending: false);
+
+    return response.cast<Map<String, dynamic>>();
+  }
+
+  /// Ambil artikel berdasarkan negara
+  static Future<List<Map<String, dynamic>>>  fetchArticlesByCountry(String country) async {
+    final List<dynamic> response = await supabase
+        .from('news_article')
+        .select()
+        .eq('country', country)
+        .order('published_at', ascending: false);
+
+    return response.cast<Map<String, dynamic>>();
+  }
+
   /// Ambil artikel berdasarkan ID
   static Future<Map<String, dynamic>?> fetchArticleById(String id) async {
     final response = await supabase
