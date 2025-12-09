@@ -3,7 +3,6 @@ import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
 import 'package:pressly/views/screens/menu/drawer.dart';
 import 'package:pressly/views/screens/search/search_screen.dart';
-import 'package:pressly/views/screens/video/video_screen.dart';
 import 'package:provider/provider.dart';
 import 'article/article_screen.dart';
 import 'home/home_content.dart';
