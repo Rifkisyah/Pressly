@@ -63,8 +63,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
           controller: _bottomBartabController,
           tabs: [
             Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/home_outlined_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 0 ? Colors.white : Colors.black),)), text: language.getText('home')),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 3 ? Colors.white : Colors.black))), text: language.getText('search'),),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: language.getText('news'),),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: language.getText('search'),),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 2 ? Colors.white : Colors.black))), text: language.getText('news'),),
           ],
           labelColor: Colors.white,
           labelPadding: EdgeInsets.symmetric(horizontal: 0),
