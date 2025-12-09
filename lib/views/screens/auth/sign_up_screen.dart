@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pressly/providers/language_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/theme_provider.dart';
@@ -16,6 +17,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png',
@@ -35,8 +38,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // login via Google
-              Text('Register', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-              Text("Use the service below to register for Pressly.", style: TextStyle(fontSize: 13),),
+              Text(language.getText('register'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+              Text(language.getText('register_subtitle'), style: TextStyle(fontSize: 13),),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: SizedBox(
@@ -48,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     icon: Image.network('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png'),
                     label: Text(
-                      'Register With Google',
+                      language.getText('register_google'),
                       style: TextStyle(
                         color: (theme.isDarkMode) ? Colors.white : Colors.black,
                         fontWeight: FontWeight.bold
@@ -78,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
                   Text(
-                    'or',
+                    language.getText('or'),
                     style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
                   ),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
@@ -92,14 +95,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: 30),
               // login manual
-              Text('Register Using Your Email (FREE) :', style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),),
+              Text(language.getText('register_email_title'), style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),),
               SizedBox(height: 20),
               TextField(
                 // controller: emailController,
                 decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: language.getText('email'),
                     labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
-                    hintText: 'Enter your account email...',
+                    hintText: language.getText('enter_email_hint'),
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -124,9 +127,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: language.getText('password'),
                     labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
-                    hintText: 'Enter your account password...',
+                    hintText: language.getText('enter_password_hint'),
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     suffixIcon: Icon(Icons.remove_red_eye),
                     border: OutlineInputBorder(
@@ -152,9 +155,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Repeat Password',
+                    labelText: language.getText('repeat_password'),
                     labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
-                    hintText: 'Enter Previous Password...',
+                    hintText: language.getText('repeat_password_hint'),
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     suffixIcon: Icon(Icons.remove_red_eye),
                     border: OutlineInputBorder(
@@ -189,16 +192,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: TextSpan(
                         style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),
                         children: [
-                          TextSpan(text: 'I agree '),
+                          TextSpan(text: language.getText('i_agree')),
                           TextSpan(
-                            text: 'Terms and Conditions clicked',
+                            text: language.getText('terms_conditions'),
                             style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {},
                           ),
-                          TextSpan(text: ' and\n'),
+                          TextSpan(text: language.getText('and')),
                           TextSpan(
-                            text: 'Privacy Policy',
+                            text: language.getText('privacy_policy'),
                             style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {},
@@ -224,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: () {
 
                   },
-                  child: Text('Register', style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 14, fontWeight: FontWeight.bold),)
+                  child: Text(language.getText('register'), style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 14, fontWeight: FontWeight.bold),)
               )
             ],
           )

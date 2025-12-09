@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
 import 'package:pressly/views/screens/menu/drawer.dart';
 import 'package:pressly/views/screens/search/search_screen.dart';
@@ -22,7 +23,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-    _bottomBartabController = TabController(length: 4, vsync: this);
+    _bottomBartabController = TabController(length: 3, vsync: this);
     _bottomBartabController.addListener(() {
       setState(() {
         _selectedIndex = _bottomBartabController.index;
@@ -33,6 +34,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: SizedBox(
@@ -51,9 +54,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
         controller: _bottomBartabController,
         children: [
           HomeScreenContent(),
+          SearchScreen(),
           ArticleScreen(),
-          VideoScreen(),
-          SearchScreen()
         ],
       ),
       bottomNavigationBar: SizedBox(
@@ -61,10 +63,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
         child: TabBar(
           controller: _bottomBartabController,
           tabs: [
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/home_outlined_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 0 ? Colors.white : Colors.black),)), text: 'Home'),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: 'News',),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/video_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 2 ? Colors.white : Colors.black))), text: 'Video',),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 3 ? Colors.white : Colors.black))), text: 'Search',),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/home_outlined_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 0 ? Colors.white : Colors.black),)), text: language.getText('home')),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 3 ? Colors.white : Colors.black))), text: language.getText('search'),),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: language.getText('news'),),
           ],
           labelColor: Colors.white,
           labelPadding: EdgeInsets.symmetric(horizontal: 0),

@@ -10,13 +10,14 @@ class DrawerMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
 
     return Drawer(
       child: Column(
         children: [
           AppBar(
             automaticallyImplyLeading: false,
-            title: Text('Menu'),
+            title: Text(language.getText('menu')),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -34,7 +35,7 @@ class DrawerMenuWidget extends StatelessWidget {
           Column(
             children: [
               SizedBox(height: 10,),
-              Text('Login To Get More Experience', style: TextStyle(fontSize: 14),),
+              Text(language.getText('login_message'), style: TextStyle(fontSize: 14),),
               SizedBox(height: 10,),
               ElevatedButton(
                 onPressed: () {
@@ -53,7 +54,7 @@ class DrawerMenuWidget extends StatelessWidget {
                   )
                 ),
                 child: Text(
-                  'Login',
+                  language.getText('login'),
                   style: TextStyle(
                     color: (theme.isDarkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.bold
@@ -70,37 +71,33 @@ class DrawerMenuWidget extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: Icon(Icons.home),
-                  title: Text('Home'),
+                  title: Text(language.getText('home')),
                 ),
               ),
               /// language
               Card(
                 child: ListTile(
                   leading: Icon(Icons.language),
-                  title: Text('Select Language'),
-                  trailing: Consumer<LanguageProvider>(
-                    builder: (context, languageProvider, _) {
-                      return SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        child: DropdownButtonFormField<String>(
-                          decoration: InputDecoration.collapsed(hintText: ''),
-                          initialValue: languageProvider.currentLanguage.codd,
-                          items: languageProvider.supportedLanguages.map((l) {
-                            return DropdownMenuItem(
-                              alignment: Alignment.center,
-                              value: l.codd,
-                              child: Text(l.codd.toUpperCase()),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            if (value != null) {
-                              languageProvider.changelanguage();
-                            }
-                          },
-                        )
-                      );
-                    }
-                  ),
+                  title: Text(language.getText('select_language')),
+                  trailing: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration.collapsed(hintText: ''),
+                      initialValue: language.currentLanguage.codd,
+                      items: language.supportedLanguages.map((l) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.center,
+                          value: l.codd,
+                          child: Text(l.codd.toUpperCase()),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          language.changeLanguage(value);
+                        }
+                      },
+                    )
+                  )
                 )
               ),
               // Card(
@@ -113,7 +110,7 @@ class DrawerMenuWidget extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: Icon(Icons.dark_mode_outlined),
-                  title: Text('Dark Mode'),
+                  title: Text(language.getText('dark_mode')),
                   trailing: Switch(
                     value: theme.isDarkMode,
                     onChanged: (value) {
@@ -126,7 +123,7 @@ class DrawerMenuWidget extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: Icon(Icons.info),
-                  title: Text('Version'),
+                  title: Text(language.getText('version')),
                 ),
 
               ),

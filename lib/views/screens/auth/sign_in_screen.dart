@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
 import 'package:pressly/views/screens/auth/sign_up_screen.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
@@ -33,8 +36,8 @@ class _SignInScreenState extends State<SignInScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // login via Google
-            Text('Login', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-            Text("Use the service below to log in to Pressly", style: TextStyle(fontSize: 13),),
+            Text(language.getText('login'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+            Text(language.getText('login_subtitle'), style: TextStyle(fontSize: 13),),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: SizedBox(
@@ -45,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   },
                   icon: Image.network('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png'),
-                  label: Text('Login With Google', style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),),
+                  label: Text(language.getText('login_google'), style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),),
                   style: ElevatedButton.styleFrom(
                     side: BorderSide(
                       color: (theme.isDarkMode) ? Colors.white : Colors.black,
@@ -70,13 +73,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
                 Text(
-                  'or',
+                  language.getText('or'),
                   style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
                 ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
                 Expanded(
                   child: Divider(
-                    color: (theme.isDarkMode) ? Colors.black : Colors.white,
+                    color: (theme.isDarkMode) ? Colors.white : Colors.black,
                     thickness: 2.0,
                   )
                 )
@@ -84,14 +87,14 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             SizedBox(height: 30),
             // login manual
-            Text('Login With Your Email :', style: TextStyle(fontSize: 13),),
+            Text(language.getText('login_email_title'), style: TextStyle(fontSize: 13),),
             SizedBox(height: 20),
             TextField(
               // controller: emailController,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: language.getText('email'),
                 labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
-                hintText: 'input your email Here...',
+                hintText: language.getText('email_hint'),
                 hintStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 13),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -116,9 +119,9 @@ class _SignInScreenState extends State<SignInScreen> {
               // controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: language.getText('password'),
                 labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
-                hintText: 'input your password here...',
+                hintText: language.getText('password_hint'),
                 hintStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 13),
                 suffixIcon: Icon(Icons.remove_red_eye),
                 border: OutlineInputBorder(
@@ -144,9 +147,9 @@ class _SignInScreenState extends State<SignInScreen> {
               text: TextSpan(
                 style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),
                 children: [
-                  TextSpan(text: 'Don''t Have an Account Yet? '),
+                  TextSpan(text: language.getText('no_account')),
                   TextSpan(
-                    text: 'Register here',
+                    text: language.getText('register_here'),
                     style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
@@ -174,7 +177,7 @@ class _SignInScreenState extends State<SignInScreen> {
               onPressed: () {
                 
               },
-              child: Text('Login', style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 14, fontWeight: FontWeight.bold),)
+              child: Text(language.getText('login'), style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 14, fontWeight: FontWeight.bold),)
             )
           ],
         )

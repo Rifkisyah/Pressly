@@ -36,7 +36,7 @@ class DetailArticleScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            Text(article["author"] ?? "Author"),
+            Text(article["source_name"] ?? "Author"),
             const SizedBox(height: 4),
             Text(article["published_at"] ?? "1 jam lalu", style: const TextStyle(color: Colors.grey)),
             const SizedBox(height: 16),
