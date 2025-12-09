@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/services/article_service.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/theme_provider.dart';
@@ -13,14 +14,14 @@ class HomeScreenContent extends StatefulWidget {
 }
 
 class _HomeScreenContentState extends State<HomeScreenContent> {
-  final Future<List<Map<String, dynamic>>> futureArticles = ArticleService.fetchArticles();
-
+  // Removed static initialization
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: futureArticles,
+      future: ArticleService.fetchArticles(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -74,7 +75,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                             child: article['image'] != null ? Image.network(
                               article['image'],
                               fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                              errorBuilder: (_, __, ___) => Icon(Icons.broken_image, color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,),
                               ) : Center(
                                 child: Container(
                                   width: 500,
@@ -172,6 +173,7 @@ class _CarouselSectionState extends State<CarouselSection> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return SizedBox(
       height: 250,
       child: Stack(
@@ -200,7 +202,7 @@ class _CarouselSectionState extends State<CarouselSection> {
                             child: Icon(
                               Icons.broken_image,
                               size: 50,
-                              color: Colors.black,
+                              color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,
                             ),
                           )
                          ),

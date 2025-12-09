@@ -12,7 +12,7 @@ class ArticleScreen extends StatefulWidget {
 
 class _ArticleScreenstate extends State<ArticleScreen> with TickerProviderStateMixin{
   late TabController _categoryController;
-  int _categoryIndex = 0;
+  late int _categoryIndex;
 
   @override
   void initState() {

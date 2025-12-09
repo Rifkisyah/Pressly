@@ -6,9 +6,9 @@ class ArticleService {
   /// Ambil semua artikel dari table `news`
   static Future<List<Map<String, dynamic>>> fetchArticles() async {
     final List<dynamic> response = await supabase
-        .from('news_article')
-        .select()
-        .order('published_at', ascending: false);
+      .from('news_article')
+      .select()
+      .order('published_at', ascending: false);
 
     return response.cast<Map<String, dynamic>>();
   }
@@ -24,24 +24,13 @@ class ArticleService {
     return response.cast<Map<String, dynamic>>();
   }
 
-  /// Ambil artikel berdasarkan negara
-  static Future<List<Map<String, dynamic>>>  fetchArticlesByCountry(String country) async {
-    final List<dynamic> response = await supabase
-        .from('news_article')
-        .select()
-        .eq('country', country)
-        .order('published_at', ascending: false);
-
-    return response.cast<Map<String, dynamic>>();
-  }
-
   /// Ambil artikel berdasarkan ID
   static Future<Map<String, dynamic>?> fetchArticleById(String id) async {
     final response = await supabase
-        .from('news')
-        .select()
-        .eq('id', id)
-        .maybeSingle();
+      .from('news')
+      .select()
+      .eq('id', id)
+      .maybeSingle();
 
     return response;
   }

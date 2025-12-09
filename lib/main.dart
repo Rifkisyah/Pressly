@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
 import 'package:pressly/views/screens/loading_screen.dart';
-import 'package:pressly/views/screens/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -16,7 +16,8 @@ void main() async{
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider())
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider())
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, theme, _) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:pressly/providers/language_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../services/article_service.dart';
 import 'detailed_news_article.dart';
 
@@ -13,18 +14,12 @@ class ListArticle extends StatefulWidget {
 }
 
 class _ListArticleState extends State<ListArticle> {
-  late Future<List<Map<String, dynamic>>> fetchArticle;
-
-  @override
-  void initState(){
-    super.initState();
-    fetchArticle = ArticleService.fetchArticlesByCategory(widget.category);
-  }
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: fetchArticle,
+      future: ArticleService.fetchArticlesByCategory(widget.category),
       builder: (context, snapshot){
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

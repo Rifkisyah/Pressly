@@ -15,7 +15,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
-  late TabController _articleCategoryController;
   late TabController _bottomBartabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
@@ -62,10 +61,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin{
         child: TabBar(
           controller: _bottomBartabController,
           tabs: [
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/home_outlined_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 0 ? Colors.white : Colors.black),)), text: 'Beranda'),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: 'Berita',),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/home_outlined_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 0 ? Colors.white : Colors.black),)), text: 'Home'),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/article_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 1 ? Colors.white : Colors.black))), text: 'News',),
             Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/video_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 2 ? Colors.white : Colors.black))), text: 'Video',),
-            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 3 ? Colors.white : Colors.black))), text: 'Cari',),
+            Tab(icon: SizedBox(height: 20, width: 20, child: Image.asset('../assets/images/search_unclicked_icon.png', color: (theme.isDarkMode) ? Colors.white : (_selectedIndex == 3 ? Colors.white : Colors.black))), text: 'Search',),
           ],
           labelColor: Colors.white,
           labelPadding: EdgeInsets.symmetric(horizontal: 0),

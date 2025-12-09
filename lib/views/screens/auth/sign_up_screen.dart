@@ -18,8 +18,16 @@ class _signUpScreenState extends State<signUpScreen> {
     final theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
-          centerTitle: true,
+        title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png',
+        width: MediaQuery.of(context).size.width * 0.3,
+        height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
+        centerTitle: true,
+        shape: Border(
+          bottom: BorderSide(
+            color: (theme.isDarkMode) ? Colors.white : Colors.black,
+            width: 1.0,
+          ),
+        ),
       ),
       body: Padding(
           padding: EdgeInsets.all(20),
@@ -27,8 +35,8 @@ class _signUpScreenState extends State<signUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // login via Google
-              Text('Daftar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-              Text("Gunakan layanan di bawah ini untuk daftar Ke Pressly.", style: TextStyle(fontSize: 13),),
+              Text('Register', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+              Text("Use the service below to register for Pressly.", style: TextStyle(fontSize: 13),),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: SizedBox(
@@ -40,7 +48,7 @@ class _signUpScreenState extends State<signUpScreen> {
                     },
                     icon: Image.network('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png'),
                     label: Text(
-                      'Daftar Dengan Google',
+                      'Register With Google',
                       style: TextStyle(
                         color: (theme.isDarkMode) ? Colors.white : Colors.black,
                         fontWeight: FontWeight.bold
@@ -48,15 +56,11 @@ class _signUpScreenState extends State<signUpScreen> {
                     ),
                     style: ElevatedButton.styleFrom(
                       side: BorderSide(
-                        width: 2.0,
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
+                        style: BorderStyle.solid,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0),
-                        side: BorderSide(
-                          color: (theme.isDarkMode) ? Colors.white : Colors.black,
-                          width: 2.0,
-                          style: BorderStyle.solid,
-                        ),
                       ),
                     ),
                   ),
@@ -67,40 +71,40 @@ class _signUpScreenState extends State<signUpScreen> {
               Row(
                 children: [
                   Expanded(
-                      child: Divider(
-
-                        thickness: 2.0,
-                      )
+                    child: Divider(
+                      color: (theme.isDarkMode) ? Colors.white : Colors.black,
+                      thickness: 2.0,
+                    )
                   ),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
                   Text(
-                    'Atau',
-                    style: TextStyle(color: Colors.grey),
+                    'or',
+                    style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
                   ),
                   Padding(padding: EdgeInsets.symmetric(horizontal: 10.0)),
                   Expanded(
-                      child: Divider(
-
-                        thickness: 2.0,
-                      )
+                    child: Divider(
+                      color: (theme.isDarkMode) ? Colors.white : Colors.black,
+                      thickness: 2.0,
+                    )
                   )
                 ],
               ),
               SizedBox(height: 30),
               // login manual
-              Text('Daftar Menggunakan Email Anda (GRATIS) :', style: TextStyle(fontSize: 13),),
+              Text('Register Using Your Email (FREE) :', style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),),
               SizedBox(height: 20),
               TextField(
                 // controller: emailController,
                 decoration: InputDecoration(
                     labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintText: 'Masukkan Email Akun Anda...',
+                    labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
+                    hintText: 'Enter your account email...',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.black,
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
                         style: BorderStyle.solid,
                         strokeAlign: BorderSide.strokeAlignCenter,
                       ),
@@ -108,7 +112,7 @@ class _signUpScreenState extends State<signUpScreen> {
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 3.0,
-                          color: Colors.black,
+                          color: (theme.isDarkMode) ? Colors.white : Colors.black,
                           style: BorderStyle.solid,
                         )
                     )
@@ -120,16 +124,16 @@ class _signUpScreenState extends State<signUpScreen> {
                 // controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Kata Sandi',
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintText: 'Masukkan Kata Sandi Akun Anda...',
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
+                    hintText: 'Enter your account password...',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     suffixIcon: Icon(Icons.remove_red_eye),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(0),
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.black,
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
                         style: BorderStyle.solid,
                         strokeAlign: BorderSide.strokeAlignCenter,
                       ),
@@ -137,7 +141,7 @@ class _signUpScreenState extends State<signUpScreen> {
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 3.0,
-                          color: Colors.black,
+                          color: (theme.isDarkMode) ? Colors.white : Colors.black,
                           style: BorderStyle.solid,
                         )
                     )
@@ -148,16 +152,16 @@ class _signUpScreenState extends State<signUpScreen> {
                 // controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Ulangi Kata Sandi',
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintText: 'Masukkan Kata Sandi Sebelumnya...',
+                    labelText: 'Repeat Password',
+                    labelStyle: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black),
+                    hintText: 'Enter Previous Password...',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
                     suffixIcon: Icon(Icons.remove_red_eye),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(0),
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.black,
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
                         style: BorderStyle.solid,
                         strokeAlign: BorderSide.strokeAlignCenter,
                       ),
@@ -165,7 +169,7 @@ class _signUpScreenState extends State<signUpScreen> {
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 3.0,
-                          color: Colors.black,
+                          color: (theme.isDarkMode) ? Colors.white : Colors.black,
                           style: BorderStyle.solid,
                         )
                     )
@@ -183,25 +187,21 @@ class _signUpScreenState extends State<signUpScreen> {
                   Expanded(
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(fontSize: 13, color: Colors.black),
+                        style: TextStyle(fontSize: 13, color: (theme.isDarkMode) ? Colors.white : Colors.black),
                         children: [
-                          TextSpan(text: 'Saya menyetujui '),
+                          TextSpan(text: 'I agree '),
                           TextSpan(
-                            text: 'Syarat dan Ketentuan',
-                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                            text: 'Terms and Conditions clicked',
+                            style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('Syarat dan Ketentuan diklik');
-                              },
+                              ..onTap = () {},
                           ),
-                          TextSpan(text: ' dan\n'),
+                          TextSpan(text: ' and\n'),
                           TextSpan(
-                            text: 'Kebijakan Privasi',
-                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                            text: 'Privacy Policy',
+                            style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('Kebijakan Privasi diklik');
-                              },
+                              ..onTap = () {},
                           ),
                         ],
                       ),
@@ -215,13 +215,16 @@ class _signUpScreenState extends State<signUpScreen> {
                     minimumSize: Size(double.infinity, 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
+                      side: BorderSide(
+                        color: (theme.isDarkMode) ? Colors.white : Colors.black,
+                        style: BorderStyle.solid,
+                      ),
                     ),
-                    backgroundColor: Colors.black,
                   ),
                   onPressed: () {
 
                   },
-                  child: Text('Daftar', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),)
+                  child: Text('Register', style: TextStyle(color: (theme.isDarkMode) ? Colors.white : Colors.black, fontSize: 14, fontWeight: FontWeight.bold),)
               )
             ],
           )
