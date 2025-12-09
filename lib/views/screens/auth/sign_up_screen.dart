@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/theme_provider.dart';
 
-class signUpScreen extends StatefulWidget {
-  const signUpScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<signUpScreen> createState() => _signUpScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _signUpScreenState extends State<signUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {

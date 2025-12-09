@@ -152,7 +152,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ..onTap = () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => signUpScreen()),
+                          MaterialPageRoute(builder: (context) => SignUpScreen()),
                         );
                       },
                   ),

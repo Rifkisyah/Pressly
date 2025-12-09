@@ -7,7 +7,7 @@ class ThemeProvider extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   bool get isDarkMode => _themeMode == ThemeMode.dark;
 
-  static String _themeKey = 'theme_key';
+  static final String _themeKey = 'theme_key';
 
   ThemeProvider() {
     _loadTheme();

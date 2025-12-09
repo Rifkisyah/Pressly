@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
-import 'package:pressly/services/article_service.dart';
 import 'package:provider/provider.dart';
 import 'package:pressly/views/screens/auth/sign_in_screen.dart';
 
@@ -85,7 +84,7 @@ class DrawerMenuWidget extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.2,
                         child: DropdownButtonFormField<String>(
                           decoration: InputDecoration.collapsed(hintText: ''),
-                          value: languageProvider.currentLanguage.codd,
+                          initialValue: languageProvider.currentLanguage.codd,
                           items: languageProvider.supportedLanguages.map((l) {
                             return DropdownMenuItem(
                               alignment: Alignment.center,

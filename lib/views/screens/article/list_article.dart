@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pressly/providers/language_provider.dart';
-import 'package:provider/provider.dart';
 import '../../../services/article_service.dart';
 import 'detailed_news_article.dart';
 
 class ListArticle extends StatefulWidget {
   final String category;
 
-  ListArticle({super.key, required this.category});
+  const ListArticle({super.key, required this.category});
 
   @override
   State<ListArticle> createState() => _ListArticleState();
@@ -56,8 +54,8 @@ class _ListArticleState extends State<ListArticle> {
                               article['image'],
                               fit: BoxFit.cover,
                               errorBuilder: (_, __, ___) => const Center(
-                                child: Icon(Icons.broken_image, size: 50,),
                                 heightFactor: 3,
+                                child: Icon(Icons.broken_image, size: 50,),
                               ),
                             )
                                 : const Center(

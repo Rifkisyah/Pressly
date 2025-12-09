@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pressly/providers/language_provider.dart';
 import 'package:pressly/services/article_service.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/theme_provider.dart';
@@ -195,7 +194,7 @@ class _CarouselSectionState extends State<CarouselSection> {
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Container(
+                        errorBuilder: (_, __, ___) => SizedBox(
                           width: double.infinity,
                           height: double.infinity,
                           child: Center(
