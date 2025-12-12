@@ -100,13 +100,7 @@ class DrawerMenuWidget extends StatelessWidget {
                   )
                 )
               ),
-              // Card(
-              //   child: ListTile(
-              //     leading: Icon(Icons.account_circle),
-              //     title: Text('Informasi Akun'),
-              //   ),
-              // ),
-              /// theme toggle
+              // theme toggle
               Card(
                 child: ListTile(
                   leading: Icon(Icons.dark_mode_outlined),

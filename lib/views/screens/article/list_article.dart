@@ -53,6 +53,8 @@ class _ListArticleState extends State<ListArticle> {
                                 ? Image.network(
                               article['image'],
                               fit: BoxFit.cover,
+                              height: 200,
+                              width: double.infinity,
                               errorBuilder: (_, __, ___) => const Center(
                                 heightFactor: 3,
                                 child: Icon(Icons.broken_image, size: 50,),
@@ -72,39 +74,6 @@ class _ListArticleState extends State<ListArticle> {
                               child: Text(article['description'], style: TextStyle(fontSize: 12),),
                             ),
                             SizedBox(height: 10,),
-                            // Center(
-                            //   child: ElevatedButton(
-                            //     onPressed: () {},
-                            //     style: ElevatedButton.styleFrom(
-                            //       backgroundColor: Colors.white,
-                            //       fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 20),
-                            //       elevation: 0,
-                            //       shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(0)
-                            //       )
-                            //     ),
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.center,
-                            //       children: [
-                            //         Text(
-                            //           'Read More',
-                            //           style: TextStyle(
-                            //             color: Colors.black,
-                            //             fontSize: 16,
-                            //             fontWeight: FontWeight.bold,
-                            //           ),
-                            //         ),
-                            //         SizedBox(width: 6),
-                            //         Icon(
-                            //           Icons.arrow_forward,
-                            //           color: Colors.black,
-                            //           size: 20,
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   )
-                            // ),
-                            SizedBox(height: 20,)
                           ]
                         ),
                       )

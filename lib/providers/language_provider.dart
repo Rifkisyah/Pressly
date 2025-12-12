@@ -70,6 +70,10 @@ class LanguageProvider extends ChangeNotifier {
       'terms_conditions': 'Terms and Conditions',
       'and': ' and\n',
       'privacy_policy': 'Privacy Policy',
+      'search_hint': 'search for any news...',
+      'category': 'Category',
+      'country': 'Country',
+      'source': 'Source Name'
     },
     'id': {
       'menu': 'Menu',
@@ -104,6 +108,10 @@ class LanguageProvider extends ChangeNotifier {
       'terms_conditions': 'Syarat dan Ketentuan',
       'and': ' dan\n',
       'privacy_policy': 'Kebijakan Privasi',
+      'search_hint': 'Cari Apa Berita Apapun...',
+      'category' : 'Kategori',
+      'country': 'Negara',
+      'source': 'Sumber'
     },
   };
 

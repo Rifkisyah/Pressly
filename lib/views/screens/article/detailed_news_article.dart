@@ -17,14 +17,14 @@ class DetailArticleScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Image.asset((theme.isDarkMode) ? '../assets/images/logo_app_dark_theme.png' : '../assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.3, fit: BoxFit.contain),
+        title: Image.asset((theme.isDarkMode) ? 'assets/images/logo_app_dark_theme.png' : 'assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.3, fit: BoxFit.contain),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {},
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.share),
+        //     onPressed: () {},
+        //   )
+        // ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -38,7 +38,7 @@ class DetailArticleScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(article["source_name"] ?? "Author"),
             const SizedBox(height: 4),
-            Text(article["published_at"] ?? "1 jam lalu", style: const TextStyle(color: Colors.grey)),
+            Text(article["published_at"] ?? "", style: const TextStyle(color: Colors.grey)),
             const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
