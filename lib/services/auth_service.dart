@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -85,6 +86,11 @@ class AuthService {
       }
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_failed') {
+        throw 'Google Sign-In failed. Please check your SHA-1 fingerprint in Firebase Console and ensure google-services.json is valid.';
+      }
+      throw 'Google Sign-In Error: ${e.message}';
     } catch (e) {
       throw 'An error occurred during Google Sign-In: ${e.toString()}';
     }
@@ -140,6 +146,8 @@ class AuthService {
         return 'This sign-in method is not enabled.';
       case 'invalid-credential':
         return 'Invalid email or password. Please check your credentials.';
+      case 'account-exists-with-different-credential':
+        return 'An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.';
       default:
         return e.message ?? 'An authentication error occurred.';
     }

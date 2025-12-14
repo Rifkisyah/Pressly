@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pressly/providers/auth_provider.dart';
 import 'package:pressly/providers/theme_provider.dart';
+import 'package:pressly/views/screens/article/detailed_article_webview.dart';
 import 'package:pressly/views/screens/auth/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../services/article_service.dart';
-import 'detailed_news_article.dart';
 
 class ListArticle extends StatefulWidget {
   final String category;
@@ -130,7 +130,7 @@ class _ListArticleState extends State<ListArticle> {
                         onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetailArticleScreen(article: article),
+                              builder: (context) => DetailedArticleWebview(article: article),
                             )
                         ),
                         child: Column(

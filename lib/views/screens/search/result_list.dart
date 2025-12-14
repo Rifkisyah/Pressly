@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pressly/views/screens/article/detailed_article_webview.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/theme_provider.dart';
 import '../../../services/article_service.dart';
-import '../article/detailed_news_article.dart';
 
 class ResultList extends StatelessWidget {
   final String keyword;
@@ -73,7 +73,7 @@ class ResultList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailArticleScreen(article: item),
+                    builder: (context) => DetailedArticleWebview(article: item),
                   ),
                 );
               },

@@ -50,6 +50,7 @@ dependencies:
   
   # Share functionality
   share_plus: ^10.1.4
+  webview_flutter: ^4.13.0
 
 dev_dependencies:
   flutter_test:

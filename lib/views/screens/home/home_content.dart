@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pressly/providers/auth_provider.dart';
 import 'package:pressly/services/article_service.dart';
+import 'package:pressly/views/screens/article/detailed_article_webview.dart';
 import 'package:pressly/views/screens/auth/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../providers/theme_provider.dart';
-import '../article/detailed_news_article.dart';
 
 class HomeScreenContent extends StatefulWidget {
   const HomeScreenContent({super.key});
@@ -129,13 +129,12 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
             return Column(
               children: [
-                // Divider(color: (theme.isDarkMode) ? Colors.white : Colors.black, height: 0, thickness: 1, indent: 10, endIndent: 10),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailArticleScreen(article: article),
+                        builder: (context) => DetailedArticleWebview(article: article),
                       ),
                     );
                   },
@@ -275,99 +274,112 @@ class _CarouselSectionState extends State<CarouselSection> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
-    return SizedBox(
-      height: 250,
-      child: Stack(
-        children: [
-          PageView.builder(
-            controller: _pageController,
-            itemCount: widget.topFive.length,
-            onPageChanged: (i) => setState(() => _currentIndex = i),
-            itemBuilder: (context, index) {
-              final item = widget.topFive[index];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      child: item['image'] != null
-                          ? Image.network(
-                        item['image'],
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => SizedBox(
+    return GestureDetector(
+      onTap: () {
+        if (_currentIndex >= 0 && _currentIndex < widget.topFive.length) {
+          final item = widget.topFive[_currentIndex];
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailedArticleWebview(article: item),
+            ),
+          );
+        }
+      },
+      child: SizedBox(
+        height: 250,
+        child: Stack(
+          children: [
+            PageView.builder(
+              controller: _pageController,
+              itemCount: widget.topFive.length,
+              onPageChanged: (i) => setState(() => _currentIndex = i),
+              itemBuilder: (context, index) {
+                final item = widget.topFive[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ClipRRect(
+                        child: item['image'] != null
+                            ? Image.network(
+                          item['image'],
                           width: double.infinity,
                           height: double.infinity,
-                          child: Center(
-                            child: Icon(
-                              Icons.broken_image,
-                              size: 50,
-                              color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,
-                            ),
-                          )
-                         ),
-                      )
-                          : Container(
-                        color: Colors.black26,
-                        child: const Icon(Icons.image_not_supported, size: 40, color: Colors.white),
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: Center(
+                                child: Icon(
+                                  Icons.broken_image,
+                                  size: 50,
+                                  color: (theme.isDarkMode) ? Colors.white : Colors.grey.shade400,
+                                ),
+                              )
+                          ),
+                        )
+                            : Container(
+                          color: Colors.black26,
+                          child: const Icon(Icons.image_not_supported, size: 40, color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      item['title'] ?? "No Title",
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    const SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        item['title'] ?? "No Title",
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      item['description'] ?? "No description",
-                      style: const TextStyle(fontSize: 12),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        item['description'] ?? "No description",
+                        style: const TextStyle(fontSize: 12),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-          Positioned(
-            left: 10,
-            top: 90,
-            child: CircleAvatar(
-              backgroundColor: Colors.black45,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 16, color: Colors.white),
-                onPressed: () {
-                  _timer?.cancel();
-                  _prevSlide();
-                  _startAutoScroll();
-                },
+                  ],
+                );
+              },
+            ),
+            Positioned(
+              left: 10,
+              top: 90,
+              child: CircleAvatar(
+                backgroundColor: Colors.black45,
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios, size: 16, color: Colors.white),
+                  onPressed: () {
+                    _timer?.cancel();
+                    _prevSlide();
+                    _startAutoScroll();
+                  },
+                ),
               ),
             ),
-          ),
-          Positioned(
-            right: 10,
-            top: 90,
-            child: CircleAvatar(
-              backgroundColor: Colors.black45,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.white),
-                onPressed: () {
-                  _timer?.cancel();
-                  _nextSlide();
-                  _startAutoScroll();
-                },
+            Positioned(
+              right: 10,
+              top: 90,
+              child: CircleAvatar(
+                backgroundColor: Colors.black45,
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.white),
+                  onPressed: () {
+                    _timer?.cancel();
+                    _nextSlide();
+                    _startAutoScroll();
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
