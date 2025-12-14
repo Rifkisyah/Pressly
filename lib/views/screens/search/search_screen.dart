@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pressly/views/screens/search/filter_search.dart';
 import 'package:pressly/views/screens/search/result_list.dart';
 import 'package:provider/provider.dart';
+import '../../../providers/language_provider.dart';
 import '../../../providers/theme_provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -27,6 +28,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
   Widget build(BuildContext context) {
     super.build(context);
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
     
     // Check if any filter is active
     final bool isFilterActive = selectedCategory != null || selectedCountry != null || selectedSource != null;
@@ -35,9 +37,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
       body: SafeArea(
         child: Column(
           children: [
-            // ======================
-            // SEARCH BAR DI ATAS
-            // ======================
+            // search bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: GestureDetector(
@@ -127,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                           onChanged: (v) => setState(() {}),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Search Anything",
+                            hintText: language.getText('search_hint'),
                             hintStyle: TextStyle(
                               color: theme.isDarkMode
                                   ? Colors.white54
@@ -147,9 +147,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
               ),
             ),
 
-            // ================================
-            // LIST HASIL PENCARIAN DI BAWAH
-            // ================================
+            // output pencarian
             Expanded(
               child: ResultList(
                 keyword: controller.text.trim(),

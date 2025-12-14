@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../providers/language_provider.dart';
 import '../../../providers/theme_provider.dart';
 
 class FilterChipsOptions extends StatefulWidget {
@@ -77,6 +78,7 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final language = Provider.of<LanguageProvider>(context);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -118,7 +120,7 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
                   ),
                 ),
 
-                _section("Category", categories, selectedCategory, theme,
+                _section(language.getText('category'), categories, selectedCategory, theme,
                         (value) {
                       setState(() {
                         selectedCategory =
@@ -134,7 +136,7 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
 
                 const SizedBox(height: 20),
 
-                _section("Country", countries, selectedCountry, theme, (value) {
+                _section(language.getText('country'), countries, selectedCountry, theme, (value) {
                   setState(() {
                     selectedCountry = selectedCountry == value ? null : value;
                   });
@@ -149,7 +151,7 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
                 const SizedBox(height: 20),
 
                 _section(
-                    "Source Name", sources, selectedSource, theme, (value) {
+                    language.getText('source'), sources, selectedSource, theme, (value) {
                   setState(() {
                     selectedSource = selectedSource == value ? null : value;
                   });

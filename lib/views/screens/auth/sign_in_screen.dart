@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset((theme.isDarkMode) ? '../../assets/images/logo_app_dark_theme.png' : '../../assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
+        title: Image.asset((theme.isDarkMode) ? 'assets/images/logo_app_dark_theme.png' : 'assets/images/logo_app_light_theme.png', width: MediaQuery.of(context).size.width * 0.3, height: MediaQuery.of(context).size.height * 0.1, fit: BoxFit.contain),
         centerTitle: true,
         shape: Border(
           bottom: BorderSide(
