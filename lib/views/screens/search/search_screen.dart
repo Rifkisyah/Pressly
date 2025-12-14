@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                         padding: const EdgeInsets.only(left: 6),
                         child: Material(
                           color: isFilterActive 
-                              ? Colors.blueAccent 
+                              ? (theme.isDarkMode ? Colors.white : Colors.black)
                               : (theme.isDarkMode
                                   ? const Color(0xFF3A3A3A)
                                   : const Color(0xFFD0D0D0)),
@@ -110,7 +110,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                                 Icons.filter_list, 
                                 size: 22,
                                 color: isFilterActive 
-                                    ? Colors.white 
+                                    ? (theme.isDarkMode ? Colors.black : Colors.white)
                                     : (theme.isDarkMode ? Colors.white : Colors.black87),
                               ),
                             ),

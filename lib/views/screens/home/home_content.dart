@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pressly/providers/auth_provider.dart';
 import 'package:pressly/services/article_service.dart';
+import 'package:pressly/views/screens/auth/sign_in_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../providers/theme_provider.dart';
 import '../article/detailed_news_article.dart';
 
@@ -13,11 +16,90 @@ class HomeScreenContent extends StatefulWidget {
 }
 
 class _HomeScreenContentState extends State<HomeScreenContent> {
-  // Removed static initialization
+
+  void _shareArticle(Map<String, dynamic> article, bool isLoggedIn) {
+    if (!isLoggedIn) {
+      // Show login required dialog
+      showDialog(
+        context: context,
+        builder: (context) {
+          final theme = Provider.of<ThemeProvider>(context);
+          return AlertDialog(
+            backgroundColor: theme.isDarkMode ? Colors.grey[900] : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: theme.isDarkMode ? Colors.white : Colors.black,
+                width: 1,
+              ),
+            ),
+            title: Text(
+              'Login Required',
+              style: TextStyle(
+                color: theme.isDarkMode ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text(
+              'You need to login to share articles. Would you like to login now?',
+              style: TextStyle(
+                color: theme.isDarkMode ? Colors.white70 : Colors.black87,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: theme.isDarkMode ? Colors.white70 : Colors.black54,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignInScreen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: theme.isDarkMode ? Colors.white : Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    color: theme.isDarkMode ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // User is logged in, share the article
+    final title = article['title'] ?? 'Check out this article';
+    final url = article['url'] ?? '';
+    final source = article['source_name'] ?? 'Pressly';
+    
+    final shareText = '$title\n\nRead more: $url\n\nShared via Pressly - $source';
+    
+    Share.share(shareText, subject: title);
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
+    final isLoggedIn = authProvider.isAuthenticated;
 
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: ArticleService.fetchArticles(),
@@ -97,9 +179,29 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                article['source_name'] ?? "Unknown Source",
-                                style: const TextStyle(color: Colors.grey),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      article['source_name'] ?? "Unknown Source",
+                                      style: const TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.share,
+                                      size: 18,
+                                      color: isLoggedIn 
+                                          ? (theme.isDarkMode ? Colors.white : Colors.black) 
+                                          : Colors.grey,
+                                    ),
+                                    tooltip: isLoggedIn ? 'Share' : 'Login to share',
+                                    onPressed: () => _shareArticle(article, isLoggedIn),
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

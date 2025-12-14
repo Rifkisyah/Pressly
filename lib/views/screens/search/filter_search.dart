@@ -218,12 +218,12 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: selected
-            ? Colors.blue
+            ? (isDark ? Colors.white : Colors.black)
             : (isDark ? const Color(0xFF2E2E2E) : const Color(0xFFF0F0F0)),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: selected
-              ? Colors.blueAccent
+              ? (isDark ? Colors.white : Colors.black)
               : (isDark ? Colors.white10 : Colors.black12),
           width: selected ? 1.2 : 0.8,
         ),
@@ -240,7 +240,7 @@ class _FilterChipsOptionsState extends State<FilterChipsOptions> {
               style: TextStyle(
                 fontSize: 14,
                 color: selected
-                    ? Colors.white
+                    ? (isDark ? Colors.black : Colors.white)
                     : (isDark ? Colors.white70 : Colors.black87),
                 fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
               ),
